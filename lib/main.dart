@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
       home: Scaffold(
         body: Center(
           child: FilledButton(
-            child: const Text('hola'),
+            child: const Text('Adios'),
             onPressed: () {},
           ),
         ),
