@@ -53,7 +53,7 @@ class SnackbarScreen extends StatelessWidget {
               showAboutDialog(context: context, children: [
                 const Text(
                     'Esse do veniam fugiat amet. Ea tempor excepteur officia adipisicing. Amet pariatur ex nulla officia aliquip tempor eu. Incididunt est consectetur amet occaecat excepteur consectetur excepteur. Voluptate do nostrud sit ex ea incididunt exercitation sunt minim.'),
-              ]);
+              ]); // Muestra la licencias automáticamente.
             },
             child: const Text('Licencias usadas')),
         FilledButton.tonal(
