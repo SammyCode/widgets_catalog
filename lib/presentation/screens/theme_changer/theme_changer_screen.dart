@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widgets_app/config/theme/app_theme.dart';
 import 'package:widgets_app/presentation/providers/theme_provider.dart';
 
 class ThemeChangerScreen extends ConsumerWidget {
@@ -8,17 +9,20 @@ class ThemeChangerScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final isDarkmode = ref.watch(isDarkmodeProvider);
+    final isDarkmode = ref.watch(themeNotifierProvider).isDarkmode;
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Theme changer'),
         actions: [
           IconButton(
-            icon: isDarkmode
-                ? Icon(Icons.dark_mode_outlined)
-                : Icon(Icons.light_mode_outlined),
-            onPressed: () {},
+            icon: Icon(isDarkmode
+                ? Icons.dark_mode_outlined
+                : Icons.light_mode_outlined),
+            onPressed: () {
+              //ref.read(isDarkmodeProvider.notifier).state = !isDarkmode;
+              ref.read(themeNotifierProvider.notifier).toggleDarkmode();
+            },
           )
         ],
       ),
@@ -34,6 +38,9 @@ class _ThemeChangerView extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final List<Color> colors = ref.watch(colorListProvider);
 
+    final int selectedColor = ref.watch(themeNotifierProvider).selectedColor;
+    // final int selectedColor = ref.watch( selectedColorProvider );
+
     return ListView.builder(
       itemCount: colors.length,
       itemBuilder: (context, index) {
@@ -46,9 +53,10 @@ class _ThemeChangerView extends ConsumerWidget {
             subtitle: Text('${color.value}'),
             activeColor: color,
             value: index,
-            groupValue: 0,
+            groupValue: selectedColor,
             onChanged: (value) {
-              //TODO notificar el cambio
+              //ref.read(selectedColorProvider.notifier).state = intex;
+              ref.read(themeNotifierProvider.notifier).changeColorIndex(index);
             });
       },
     );
